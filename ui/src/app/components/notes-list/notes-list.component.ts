@@ -6,7 +6,6 @@ import {Note} from "../../structures/note";
 @Component({
   selector: 'notes-list',
   templateUrl: './notes-list.component.html',
-  styleUrls: ['./notes-list.component.less']
 })
 export class NotesListComponent implements OnInit {
   public notes$: undefined | Observable<Note[]>;

@@ -1,4 +1,12 @@
-<div>
-  <button (click)="addNewNote()">Add note</button>
-  <input [(ngModel)]="text" placeholder="type your note">
-</div>
+<form
+  ngNativeValidate #form
+  (ngSubmit)="form.checkValidity() ? addNewNote() : null"
+>
+  <input
+    [(ngModel)]="text"
+    name="text"
+    placeholder="type your note"
+    required
+  >
+  <button type="submit">Add note</button>
+</form>
