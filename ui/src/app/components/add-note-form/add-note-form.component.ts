@@ -18,7 +18,8 @@ export class AddNoteFormComponent {
     try {
       await this.notesService.postNote(this.text);
     } catch (err) {
-      alert(err);
+      alert("Failed to add new note.");
+      throw new Error(err);
     }
   }
 }

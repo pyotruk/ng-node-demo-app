@@ -29,8 +29,19 @@ services:
       - api/node_modules
     depends_on:
       - mysqldb
-    stdin_open: true
-    tty: true
+  ui:
+    build:
+      context: .
+      dockerfile: ./ui/Dockerfile
+    image: ui
+    env_file: ./.env
+    ports:
+      - 8080:8080
+    volumes:
+      - ./ui:/ui
+      - ui/node_modules
+    depends_on:
+      - api
 
 volumes:
   db-config:
