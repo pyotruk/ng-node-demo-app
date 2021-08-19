@@ -9,7 +9,8 @@
     "start": "npm run build && NODE_ENV=dev node dist/index.js",
     "build": "tsc -p .",
     "test": "NODE_ENV=test node_modules/.bin/mocha --recursive",
-    "lint": "npx eslint app/"
+    "lint": "npx eslint app/",
+    "lint:fix": "npx eslint --fix app/"
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
