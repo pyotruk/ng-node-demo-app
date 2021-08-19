@@ -6,6 +6,7 @@ import {HttpClientModule} from "@angular/common/http";
 import { NotesListComponent } from './components/notes-list/notes-list.component';
 import { AddNoteFormComponent } from './components/add-note-form/add-note-form.component';
 import {FormsModule} from "@angular/forms";
+import {NotesService, NotesServiceInterface} from "./services/notes.service";
 
 @NgModule({
   declarations: [
@@ -19,7 +20,12 @@ import {FormsModule} from "@angular/forms";
     HttpClientModule,
     FormsModule,
   ],
-  providers: [],
+  providers: [
+    {
+      provide: NotesServiceInterface,
+      useClass: NotesService,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

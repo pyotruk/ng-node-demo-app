@@ -1,5 +1,5 @@
 import {Component} from '@angular/core';
-import {NotesService} from "../../services/notes.service";
+import {NotesServiceInterface} from "../../services/notes.service";
 
 @Component({
   selector: 'add-note-form',
@@ -11,7 +11,7 @@ export class AddNoteFormComponent {
   public text: string = "";
 
   constructor(
-    public notesService: NotesService,
+    public notesService: NotesServiceInterface,
   ) {}
 
   public async addNewNote() {

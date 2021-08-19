@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {NotesService} from "../../services/notes.service";
+import {NotesServiceInterface} from "../../services/notes.service";
 import {Observable} from "rxjs";
 import {Note} from "../../structures/note";
 
@@ -11,7 +11,7 @@ export class NotesListComponent implements OnInit {
   public notes$: undefined | Observable<Note[]>;
 
   constructor(
-    public notesService: NotesService,
+    public notesService: NotesServiceInterface,
   ) {}
 
   ngOnInit(): void {

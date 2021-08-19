@@ -4,10 +4,13 @@ import {Note} from "../structures/note";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
 
-@Injectable({
-  providedIn: 'root'
-})
-export class NotesService {
+export abstract class NotesServiceInterface {
+   abstract get notes$(): Observable<Note[]>;
+   abstract postNote(text: string): Promise<void>;
+}
+
+@Injectable()
+export class NotesService implements NotesServiceInterface {
   private readonly notes$$: BehaviorSubject<Note[]> = new BehaviorSubject<Note[]>([]);
 
   constructor(
