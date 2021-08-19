@@ -1,4 +1,4 @@
-import sequelize from "./sequelize"
+import sequelize from "./sequelize";
 import {DataTypes, Model, Optional} from "sequelize";
 
 interface NoteAttributes {
