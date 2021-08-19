@@ -6,7 +6,7 @@ import log4js, {Logger} from "log4js";
 const log: Logger = log4js.getLogger('routes')
 
 export default {
-    configure: async (app: Express) => {
+    configure: async (app: Express): Promise<void> => {
 
         // creates tables if don't exist, but doesn't drop any
         await sequelize.sync({ force: false });
