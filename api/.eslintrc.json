@@ -12,6 +12,7 @@
         "quotes": ["error", "double"],
         "comma-dangle": ["error", "always-multiline"],
         "semi": ["error", "always"],
+        "object-curly-spacing": ["error", "never"],
         "@typescript-eslint/no-empty-interface": "off"
     }
 }

@@ -9,7 +9,7 @@ export default {
     configure: async (app: Express): Promise<void> => {
 
         // creates tables if don't exist, but doesn't drop any
-        await sequelize.sync({ force: false });
+        await sequelize.sync({force: false});
 
         app.post("/note", async (req, res) => {
             try {
