@@ -1,12 +1,9 @@
 FROM node:14
 
-WORKDIR /api
+COPY ./api /usr/src/application
 
-COPY /api/package.json .
-
+WORKDIR /usr/src/application
 RUN npm install
-
-COPY /api .
 
 EXPOSE 3000
 

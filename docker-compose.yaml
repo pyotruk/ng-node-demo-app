@@ -24,9 +24,6 @@ services:
     env_file: ./.env
     ports:
       - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
-    volumes:
-      - ./api:/api
-      - api/node_modules
     depends_on:
       - mysqldb
   ui:
@@ -37,9 +34,6 @@ services:
     env_file: ./.env
     ports:
       - 8080:8080
-    volumes:
-      - ./ui:/ui
-      - ui/node_modules
     depends_on:
       - api
 
