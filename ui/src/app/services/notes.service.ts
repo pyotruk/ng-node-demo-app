@@ -3,7 +3,7 @@ import {BehaviorSubject, Observable} from 'rxjs';
 import {Note} from "../structures/note";
 import {HttpClient} from "@angular/common/http";
 
-const API_URL = "http://localhost:3000"; // TODO via injection token
+const API_URL = "http://localhost:8080/api"; // TODO via injection token
 
 @Injectable({
   providedIn: 'root'
