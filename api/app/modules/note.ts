@@ -1,9 +1,19 @@
 import sequelize from './sequelize'
-import {DataTypes, Model} from "sequelize";
+import {DataTypes, Model, Optional} from "sequelize";
 
-class Note extends Model {
+interface NoteAttributes {
+    id: number;
+    text: string;
+}
+
+interface NoteCreationAttributes extends Optional<NoteAttributes, "id"> {}
+
+class Note extends Model<NoteAttributes, NoteCreationAttributes> implements NoteAttributes {
     public id!: number;
     public text!: string;
+
+    public readonly createdAt!: Date;
+    public readonly updatedAt!: Date;
 }
 
 Note.init(
