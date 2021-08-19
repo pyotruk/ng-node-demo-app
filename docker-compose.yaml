@@ -10,9 +10,9 @@ services:
       MYSQL_ROOT_PASSWORD: $MYSQL_ROOT_PASSWORD
       MYSQL_DATABASE: $MYSQL_DATABASE
     ports:
-      - $MYSQL_LOCAL_PORT:$MYSQL_DOCKER_PORT
+      - $MYSQL_PORT:$MYSQL_PORT
     volumes:
-      - ./init:/docker-entrypoint-initdb.d
+      - ./db-init:/docker-entrypoint-initdb.d
       - db-config:/etc/mysql
       - db-data:/var/lib/mysql
       - ./db/backup/files/:/data_backup/data
@@ -23,7 +23,7 @@ services:
     image: api
     env_file: ./.env
     ports:
-      - $NODE_LOCAL_PORT:$NODE_DOCKER_PORT
+      - $NODE_PORT:$NODE_PORT
     depends_on:
       - mysqldb
   ui:
@@ -33,7 +33,7 @@ services:
     image: ui
     env_file: ./.env
     ports:
-      - 8080:8080
+      - $NGINX_PORT:$NGINX_PORT
     volumes:
       - ./nginx-logs:/var/log/nginx
     depends_on:
