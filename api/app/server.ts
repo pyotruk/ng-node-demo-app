@@ -8,7 +8,7 @@ const env: undefined | string = process.env.NODE_ENV
 
 log4js.configure({
     appenders: {console: {type: "console", layout: {type: "colored"}}},
-    categories: {default: {appenders: ["console"], level: "DEBUG"}}
+    categories: {default: {appenders: ["console"], level: "DEBUG"}},
 })
 
 const log: Logger = log4js.getLogger("server")
