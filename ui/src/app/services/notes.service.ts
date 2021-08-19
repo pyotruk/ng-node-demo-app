@@ -1,9 +1,8 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {BehaviorSubject, Observable} from 'rxjs';
 import {Note} from "../structures/note";
 import {HttpClient} from "@angular/common/http";
-
-const API_URL = "http://localhost:8080/api"; // TODO via injection token
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +13,7 @@ export class NotesService {
   constructor(
     private http: HttpClient,
   ) {
-    this.http.get<Note[]>(`${API_URL}/notes`).subscribe((notes: Note[]) => {
+    this.http.get<Note[]>(`${environment.apiUrl}/notes`).subscribe((notes: Note[]) => {
       this.notes$$.next(notes);
     })
   }
@@ -30,7 +29,7 @@ export class NotesService {
     this.notes$$.next([...notesSnapshot, {id: notesSnapshot.length + 1, text}]);
 
     return new Promise((resolve,reject) => {
-      this.http.post<{text: string}>(`${API_URL}/note`, {text}).subscribe(
+      this.http.post<{text: string}>(`${environment.apiUrl}/note`, {text}).subscribe(
         () => resolve(),
         (err) => {
           // rolling back the new note that was added optimistically
