@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {BehaviorSubject, Observable} from 'rxjs';
+import {Injectable} from "@angular/core";
+import {BehaviorSubject, Observable} from "rxjs";
 import {Note} from "../structures/note";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -18,7 +18,7 @@ export class NotesService implements NotesServiceInterface {
   ) {
     this.http.get<Note[]>(`${environment.apiUrl}/notes`).subscribe((notes: Note[]) => {
       this.notes$$.next(notes);
-    })
+    });
   }
 
   public get notes$(): Observable<Note[]> {
