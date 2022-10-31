@@ -20,7 +20,7 @@ export class AddNoteFormComponent {
       this.text = "";
     } catch (err) {
       alert("Failed to add new note.");
-      throw new Error(err);
+      throw err;
     }
   }
 }

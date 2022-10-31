@@ -1,4 +1,4 @@
-FROM node:14 as node
+FROM node:16 as node
 
 COPY ./ui /usr/src/application
 
