@@ -1,5 +1,5 @@
 import {Injectable} from "@angular/core";
-import {BehaviorSubject, Observable} from "rxjs";
+import {BehaviorSubject, Observable, of} from "rxjs";
 import {Note} from "../structures/note";
 import {HttpClient} from "@angular/common/http";
 import {environment} from "../../environments/environment";
@@ -42,5 +42,17 @@ export class NotesService implements NotesServiceInterface {
         },
       );
     });
+  }
+}
+
+@Injectable()
+export class NullNotesService implements NotesServiceInterface {
+  public get notes$(): Observable<Note[]> {
+    return of([]);
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public postNote(text: string): Promise<void> {
+    return Promise.resolve();
   }
 }
