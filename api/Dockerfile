@@ -1,4 +1,4 @@
-FROM node:14
+FROM node:18
 
 COPY ./api /usr/src/application
 

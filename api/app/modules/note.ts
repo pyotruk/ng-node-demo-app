@@ -30,7 +30,7 @@ Note.init(
     },
     {
         tableName: "notes",
-        sequelize,
+        sequelize: sequelize.getInstance(),
     }
 );
 
