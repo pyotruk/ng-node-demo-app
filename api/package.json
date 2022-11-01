@@ -5,9 +5,9 @@
   "author": "vldmr.me",
   "license": "ISC",
   "main": "index.ts",
-  "engines" : {
-    "npm" : ">=8.0.0",
-    "node" : ">=16.0.0"
+  "engines": {
+    "npm": ">=8.0.0",
+    "node": ">=16.0.0"
   },
   "scripts": {
     "start": "npm run build && NODE_ENV=dev node dist/index.js",
@@ -24,7 +24,8 @@
     "express": "^4.18.2",
     "log4js": "^6.7.0",
     "mysql2": "^2.3.3",
-    "sequelize": "^6.25.3"
+    "sequelize": "^6.25.3",
+    "sqlite3": "^5.1.2"
   },
   "devDependencies": {
     "@types/node": "^18.11.8",

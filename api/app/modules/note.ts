@@ -19,7 +19,7 @@ class Note extends Model<NoteAttributes, NoteCreationAttributes> implements Note
 Note.init(
     {
         id: {
-            type: DataTypes.INTEGER.UNSIGNED,
+            type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
