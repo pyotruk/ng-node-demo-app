@@ -31,4 +31,12 @@ describe("NotesService", () => {
   it("should create", () => {
     expect(service).toBeTruthy();
   });
+
+  it("should return 1 note", () => {
+    service.notes$.subscribe((notes: Note[]) => {
+      expect(notes.length).toEqual(1);
+      expect(notes[0].id).toEqual(1);
+      expect(notes[0].text).toEqual("foo");
+    });
+  });
 });
