@@ -2,7 +2,6 @@ import {ComponentFixture, TestBed} from "@angular/core/testing";
 
 import {NotesListComponent} from "./notes-list.component";
 import {NotesServiceInterface, NullNotesService} from "../../services/notes.service";
-import {HttpClientModule} from "@angular/common/http";
 
 describe("NotesListComponent", () => {
   let component: NotesListComponent;
