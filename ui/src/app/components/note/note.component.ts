@@ -10,9 +10,25 @@ import {NotesServiceInterface} from "../../services/notes.service";
 export class NoteComponent {
   @Input() public note: undefined | Note;
 
+  public isEditing = false;
+
   constructor(
     public notesService: NotesServiceInterface,
   ) {}
+
+  public async updateNote(): Promise<void> {
+    if (!this.note) {
+      return;
+    }
+
+    try {
+      await this.notesService.updateNote(this.note.id, this.note.text);
+      this.isEditing = false;
+    } catch (err) {
+      alert(`Failed to update note with id = ${this.note.id}.`);
+      throw err;
+    }
+  }
 
   public async deleteNote(): Promise<void> {
     if (!this.note) {

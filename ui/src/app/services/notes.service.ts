@@ -7,6 +7,7 @@ import {environment} from "../../environments/environment";
 export abstract class NotesServiceInterface {
    abstract get notes$(): Observable<Note[]>;
    abstract postNote(text: string): Promise<void>;
+   abstract updateNote(id: number, text: string): Promise<void>;
    abstract deleteNote(id: number): Promise<void>;
 }
 
@@ -42,6 +43,20 @@ export class NotesService implements NotesServiceInterface {
     });
   }
 
+  public updateNote(id: number, text: string): Promise<void> {
+    const notesSnapshot: Note[] = this.notes$$.getValue();
+
+    return new Promise((resolve,reject) => {
+      this.http.patch<Note>(`${environment.apiUrl}/note`, {id, text}).subscribe(
+        () => resolve(),
+        (err) => {
+          this.notes$$.next([...notesSnapshot]);
+          reject(err);
+        },
+      );
+    });
+  }
+
   public deleteNote(id: number): Promise<void> {
     const notesSnapshot: Note[] = this.notes$$.getValue();
 
@@ -67,6 +82,11 @@ export class NullNotesService implements NotesServiceInterface {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public postNote(text: string): Promise<void> {
+    return Promise.resolve();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public updateNote(id: number, text: string): Promise<void> {
     return Promise.resolve();
   }
 

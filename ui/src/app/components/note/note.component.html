@@ -1,5 +1,16 @@
 <p *ngIf="note">
   <b>#{{ note.id }}</b>&nbsp;
-  <span>{{ note.text }}</span>
+  <span *ngIf="!isEditing">
+    <span>{{ note.text }}</span>
+    <i class="fa fa-pencil" (click)="isEditing = !isEditing"></i>
+  </span>
+  <span *ngIf="isEditing">
+    <input
+      name="text"
+      [(ngModel)]="note.text"
+      required
+    />
+    <i class="fa fa-check" (click)="updateNote()"></i>
+  </span>
   <i class="fa fa-times" (click)="deleteNote()"></i>
 </p>
