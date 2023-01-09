@@ -1,4 +1,5 @@
 <p *ngIf="note">
   <b>#{{ note.id }}</b>&nbsp;
   <span>{{ note.text }}</span>
+  <i class="fa fa-times" (click)="deleteNote()"></i>
 </p>

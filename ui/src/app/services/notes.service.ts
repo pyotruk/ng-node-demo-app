@@ -7,6 +7,7 @@ import {environment} from "../../environments/environment";
 export abstract class NotesServiceInterface {
    abstract get notes$(): Observable<Note[]>;
    abstract postNote(text: string): Promise<void>;
+   abstract deleteNote(id: number): Promise<void>;
 }
 
 @Injectable()
@@ -28,16 +29,29 @@ export class NotesService implements NotesServiceInterface {
   public postNote(text: string): Promise<void> {
     const notesSnapshot: Note[] = this.notes$$.getValue();
 
-    // adding a new note optimistically
-    this.notes$$.next([...notesSnapshot, {id: notesSnapshot.length + 1, text}]);
-
     return new Promise((resolve,reject) => {
-      this.http.post<{text: string}>(`${environment.apiUrl}/note`, {text}).subscribe(
-        () => resolve(),
+      this.http.post<Note>(`${environment.apiUrl}/note`, {text}).subscribe(
+        (note: Note) => {
+          this.notes$$.next([...notesSnapshot, note]);
+          resolve();
+        },
         (err) => {
-          // rolling back the new note that was added optimistically
-          this.notes$$.next(notesSnapshot);
+          reject(err);
+        },
+      );
+    });
+  }
 
+  public deleteNote(id: number): Promise<void> {
+    const notesSnapshot: Note[] = this.notes$$.getValue();
+
+    return new Promise((resolve, reject) => {
+      this.http.delete<{id: number}>(`${environment.apiUrl}/note`, {body: {id}}).subscribe(
+        () => {
+          this.notes$$.next([...(notesSnapshot.filter((note: Note) => note.id !== id))]);
+          resolve();
+        },
+        (err) => {
           reject(err);
         },
       );
@@ -53,6 +67,11 @@ export class NullNotesService implements NotesServiceInterface {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   public postNote(text: string): Promise<void> {
+    return Promise.resolve();
+  }
+
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  public deleteNote(id: number): Promise<void> {
     return Promise.resolve();
   }
 }

@@ -1,10 +1,29 @@
 import {Component, Input} from "@angular/core";
 import {Note} from "../../structures/note";
+import {NotesServiceInterface} from "../../services/notes.service";
 
 @Component({
   selector: "note",
   templateUrl: "./note.component.html",
+  styleUrls: ["./note.component.less"],
 })
 export class NoteComponent {
   @Input() public note: undefined | Note;
+
+  constructor(
+    public notesService: NotesServiceInterface,
+  ) {}
+
+  public async deleteNote(): Promise<void> {
+    if (!this.note) {
+      return;
+    }
+
+    try {
+      await this.notesService.deleteNote(this.note.id);
+    } catch (err) {
+      alert(`Failed to delete note with id = ${this.note.id}.`);
+      throw err;
+    }
+  }
 }
